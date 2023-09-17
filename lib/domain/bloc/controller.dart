@@ -262,8 +262,8 @@ class VideoEditorController extends ChangeNotifier {
   Future<void> dispose() async {
     if (_video.value.isPlaying) await _video.pause();
     _video.removeListener(_videoListener);
-    final executions = await FFmpegKit.listSessions();
-    if (executions.isNotEmpty) await FFmpegKit.cancel();
+   // final executions = await FFmpegKit.listSessions();
+   // if (executions.isNotEmpty) await FFmpegKit.cancel();
     _video.dispose();
     _selectedCover.dispose();
     super.dispose();

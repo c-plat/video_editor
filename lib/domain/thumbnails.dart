@@ -12,18 +12,33 @@ Stream<List<Uint8List>> generateTrimThumbnails(
 }) async* {
   final String path = controller.file.path;
   final double eachPart = controller.videoDuration.inMilliseconds / quantity;
-  List<Uint8List> byteList = [];
+  List<Uint8List>? byteList = [];
+  Map<int, Uint8List> tmpMap = {};
+
+  final maxHeight = (controller.videoHeight * 0.1).toInt();
+  final maxWidth = (controller.videoWidth * 0.1).toInt();
 
   for (int i = 1; i <= quantity; i++) {
     try {
-      final Uint8List? bytes = await VideoThumbnail.thumbnailData(
-        imageFormat: ImageFormat.JPEG,
-        video: path,
-        timeMs: (eachPart * i).toInt(),
-        quality: quality,
-      );
-      if (bytes != null) {
-        byteList.add(bytes);
+      final idx = (eachPart * i).toInt();
+      final isExist = tmpMap.containsKey(idx);
+
+      if (isExist) {
+        byteList.add(tmpMap[idx]!);
+      } else {
+        final Uint8List? bytes = await VideoThumbnail.thumbnailData(
+          imageFormat: ImageFormat.WEBP,
+          video: path,
+          timeMs: idx,
+          quality: quality,
+          maxHeight: maxHeight,
+          maxWidth: maxWidth,
+        );
+
+        if (bytes != null) {
+          byteList.add(bytes);
+          tmpMap[idx] = bytes;
+        }
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -38,9 +53,8 @@ Stream<List<CoverData>> generateCoverThumbnails(
   required int quantity,
   int quality = 10,
 }) async* {
-  final int duration = controller.isTrimmed
-      ? controller.trimmedDuration.inMilliseconds
-      : controller.videoDuration.inMilliseconds;
+  final int duration =
+      controller.isTrimmed ? controller.trimmedDuration.inMilliseconds : controller.videoDuration.inMilliseconds;
   final double eachPart = duration / quantity;
   List<CoverData> byteList = [];
 
@@ -48,10 +62,7 @@ Stream<List<CoverData>> generateCoverThumbnails(
     try {
       final CoverData bytes = await generateSingleCoverThumbnail(
         controller.file.path,
-        timeMs: (controller.isTrimmed
-                ? (eachPart * i) + controller.startTrim.inMilliseconds
-                : (eachPart * i))
-            .toInt(),
+        timeMs: (controller.isTrimmed ? (eachPart * i) + controller.startTrim.inMilliseconds : (eachPart * i)).toInt(),
         quality: quality,
       );
 

@@ -58,10 +58,10 @@ SPEC CHECKSUMS:
   ffmpeg-kit-ios-min-gpl: ac5eb47f98b27e26d14c009de3ce9181007ce688
   ffmpeg_kit_flutter_min_gpl: f657651b493b7608fad9dda3ad606eb0946c9faa
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
+  image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
   libwebp: 60305b2e989864154bd9be3d772730f08fc6a59c
-  path_provider_foundation: 37748e03f12783f9de2cb2c4eadfaa25fe6d4852
-  video_player_avfoundation: e489aac24ef5cf7af82702979ed16f2a5ef84cff
+  path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
+  video_player_avfoundation: 81e49bb3d9fb63dccf9fa0f6d877dc3ddbeac126
   video_thumbnail: c4e2a3c539e247d4de13cd545344fd2d26ffafd1
 
 PODFILE CHECKSUM: ccd901b1465efa56fa30557fdc5ae4eddcc3f504
