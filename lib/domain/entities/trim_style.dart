@@ -9,7 +9,7 @@ class TrimSliderStyle {
     this.background = Colors.black54,
     this.positionLineColor = Colors.white,
     this.positionLineWidth = 4,
-    this.lineColor = Colors.white60,
+    this.lineColor = kDefaultSelectedColor,
     this.onTrimmingColor = kDefaultSelectedColor,
     this.onTrimmedColor = kDefaultSelectedColor,
     this.lineWidth = 2,
@@ -96,6 +96,5 @@ class TrimSliderStyle {
   final IconData? rightIcon;
 
   /// Returns left and right line width depending on [edgesType]
-  double get edgeWidth =>
-      edgesType == TrimSliderEdgesType.bar ? edgesSize : lineWidth;
+  double get edgeWidth => edgesType == TrimSliderEdgesType.bar ? edgesSize : lineWidth;
 }
